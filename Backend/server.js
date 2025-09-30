@@ -6,13 +6,13 @@ const compression=require('compression');
 const helmet= require('helmet');
 const app=express();
 const userRoutes=require('./routes/userRoute');
-const PORT=process.env.PORT||8000;
 app.use(helmet())
 app.use(express.json());
 app.use(compression());
 const connectDB = require("./config/dbConnection");
 app.use("/api/users", userRoutes);
 require('dotenv').config();
+const PORT=process.env.PORT;
 connectDB();
 const server = http.createServer(app);
 app.use(cors({
@@ -149,20 +149,12 @@ socket.on("submit-answer", ({ studentId, pollId, options,answer }) => {
   }
 });
 
-// Inside io.on("connection", socket) { ... }
-
-const pollChats = {}; // Store messages per poll
-
-// Event: Join chat (same as joining poll room)
+const pollChats = {};
 socket.on("join-chat", ({ pollId, studentId, studentName }) => {
   if (!pollId || !studentId || !studentName) return;
 
-  socket.join(pollId); // Join the poll room
-
-  // Initialize chat array for this poll if not exists
+  socket.join(pollId); 
   if (!pollChats[pollId]) pollChats[pollId] = [];
-
-  // Optionally send existing chat history to this student
   socket.emit("chat-history", pollChats[pollId]);
 
   console.log(`${studentName} joined chat for poll ${pollId}`);
