@@ -12,7 +12,7 @@ app.use(compression());
 const connectDB = require("./config/dbConnection");
 app.use("/api/users", userRoutes);
 require('dotenv').config();
-const PORT=process.env.PORT;
+const PORT = process.env.PORT || 8000;
 connectDB();
 const server = http.createServer(app);
 app.use(cors({
