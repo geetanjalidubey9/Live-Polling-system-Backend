@@ -16,20 +16,16 @@ const PORT = process.env.PORT || 8000;
 connectDB();
 const server = http.createServer(app);
 app.use(cors({
-  origin:"https://live-polling-system-frontend-u141.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  origin: "https://live-polling-system-frontend-u141.vercel.app",
   credentials: true
 }));
-
 const io = new Server(server, {
   cors: {
-    origin:"https://live-polling-system-frontend-u141.vercel.app",
-    methods: ["GET", "POST"],
+    origin: "https://live-polling-system-frontend-u141.vercel.app",
     credentials: true
   },
   transports: ["websocket", "polling"]
 });
-
 
 const pollStudentCount = {};
 const pollAnswerCount = {};  
