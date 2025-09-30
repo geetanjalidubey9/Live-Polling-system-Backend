@@ -16,14 +16,14 @@ require('dotenv').config();
 connectDB();
 const server = http.createServer(app);
 app.use(cors({
-  origin: "https://live-polling-system-frontend-u141.vercel.app",
+  origin:"https://live-polling-system-frontend-u141.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
 
 const io = new Server(server, {
   cors: {
-    origin: "https://live-polling-system-frontend-u141.vercel.app",
+    origin:"https://live-polling-system-frontend-u141.vercel.app",
     methods: ["GET", "POST"],
     credentials: true
   },
