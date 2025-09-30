@@ -10,20 +10,27 @@ const PORT=process.env.PORT||8000;
 app.use(helmet())
 app.use(express.json());
 app.use(compression());
-app.use(cors())
 const connectDB = require("./config/dbConnection");
 app.use("/api/users", userRoutes);
 require('dotenv').config();
 connectDB();
 const server = http.createServer(app);
-const io = new Server(server, { 
-  cors: { 
+app.use(cors({
+  origin: "https://live-polling-system-frontend-u141.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
+}));
+
+const io = new Server(server, {
+  cors: {
     origin: "https://live-polling-system-frontend-u141.vercel.app",
     methods: ["GET", "POST"],
     credentials: true
   },
   transports: ["websocket", "polling"]
 });
+
+
 const pollStudentCount = {};
 const pollAnswerCount = {};  
 const pollAnswers = {};    
