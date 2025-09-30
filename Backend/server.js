@@ -21,7 +21,8 @@ const io = new Server(server, {
     origin: "https://live-polling-system-frontend-u141.vercel.app",
     methods: ["GET", "POST"],
     credentials: true
-  } 
+  },
+  transports: ["websocket", "polling"]
 });
 const pollStudentCount = {};
 const pollAnswerCount = {};  
