@@ -16,8 +16,13 @@ app.use("/api/users", userRoutes);
 require('dotenv').config();
 connectDB();
 const server = http.createServer(app);
-const io = new Server(server, { cors: { origin: "*" } });
-
+const io = new Server(server, { 
+  cors: { 
+    origin: "https://live-polling-system-frontend-u141.vercel.app",
+    methods: ["GET", "POST"],
+    credentials: true
+  } 
+});
 const pollStudentCount = {};
 const pollAnswerCount = {};  
 const pollAnswers = {};    
