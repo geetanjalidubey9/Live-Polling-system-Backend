@@ -17,12 +17,10 @@ connectDB();
 const server = http.createServer(app);
 app.use(cors({
   origin: "https://live-polling-system-frontend-u141.vercel.app",
-  credentials: true
 }));
 const io = new Server(server, {
   cors: {
     origin: "https://live-polling-system-frontend-u141.vercel.app",
-    credentials: true
   },
   transports: ["websocket", "polling"]
 });
