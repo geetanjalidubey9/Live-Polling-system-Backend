@@ -10,7 +10,6 @@ app.use(helmet())
 app.use(express.json());
 app.use(compression());
 const connectDB = require("./config/dbConnection");
-app.use("/api/users", userRoutes);
 require('dotenv').config();
 const PORT = process.env.PORT || 8000;
 connectDB();
@@ -24,7 +23,7 @@ const io = new Server(server, {
   },
   transports: ["websocket", "polling"]
 });
-
+app.use("/api/users", userRoutes);
 const pollStudentCount = {};
 const pollAnswerCount = {};  
 const pollAnswers = {};    
